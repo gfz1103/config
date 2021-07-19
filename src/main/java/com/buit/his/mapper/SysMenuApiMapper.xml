@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buit.his.dao.SysMenuApiDao">
+    <select id="getApiCount" resultType="java.lang.Integer">
+        select count(1)
+        from his.sys_group a
+        LEFT JOIN his.sys_group_menu b ON a.GROUP_ID = b.GROUP_ID
+        LEFT JOIN his.sys_menu c ON b.MENU_ID = c.MENU_ID
+        LEFT JOIN his.sys_user_group d ON a.GROUP_ID = d.GROUP_ID
+        LEFT JOIN his.sys_user e ON d.USER_ID = e.USER_ID
+        LEFT JOIN his.sys_menu_api f ON c.MENU_ID = f.MENU_ID
+        where e.USER_ID=#{uid} and f.apiName =#{apiName}
+    </select>
+</mapper>
+
